@@ -7,10 +7,10 @@ use sui::event;
 // Objeto principal de votación
 public struct Poll has key {
     id: UID,
-    question: string::String, // Fixed unbound type reference
+    question: string::String, 
     options: vector<string::String>,
-    votes: vector<VoteEntry>, // Updated to use VoteEntry struct
-    voters: vector<address>, // Updated to use vector instead of VecSet
+    votes: vector<VoteEntry>, 
+    voters: vector<address>, 
     is_active: bool,
 }
 
@@ -19,14 +19,14 @@ public struct VotingTicket has key, store {
     id: UID,
 }
 
-// Evento para seguimiento
+
 public struct VoteEvent has copy, drop {
     poll_id: ID,
     voter: address,
     option_index: u8,
 }
 
-public struct VoteEntry has copy, drop, store { // Made struct public
+public struct VoteEntry has copy, drop, store { 
     option_index: u8,
     count: u64,
 }
@@ -43,8 +43,8 @@ public fun create_poll(
         id: object::new(ctx),
         question: string::utf8(question),
         options: create_options_vector(options),
-        votes: vector::empty(), // Updated to use vector for key-value pairs
-        voters: vector::empty(), // Initialize as empty vector
+        votes: vector::empty(), 
+        voters: vector::empty(), 
         is_active: true,
     };
 
@@ -105,11 +105,11 @@ public fun vote(
     });
 
     // Destruir NFT para evitar reutilización
-    let VotingTicket { id: ticket_id } = ticket; // Destructure to move out the id
+    let VotingTicket { id: ticket_id } = ticket; 
     object::delete(ticket_id);
 }
 
-// Helper function to check if a voter exists in the vector
+
 fun contains_voter(voters: &vector<address>, voter: &address): bool {
     let mut i = 0;
     while (i < vector::length(voters)) {
@@ -147,7 +147,7 @@ public fun has_voted(poll: &Poll, voter: address): bool {
 // ===== HELPERS =====
 fun create_options_vector(options: vector<vector<u8>>): vector<string::String> {
     let mut result = vector::empty<string::String>();
-    let mut i = 0; // Declare as 'mut' for assignment
+    let mut i = 0; 
     while (i < vector::length(&options)) {
         vector::push_back(&mut result, string::utf8(*vector::borrow(&options, i)));
         i = i + 1;
