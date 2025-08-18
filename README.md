@@ -24,13 +24,7 @@ This project implements a simple and secure voting system as a Move smart contra
 
 ## Usage Instructions
 
-### 1. Publish the Module
-Publish the Move module to Sui testnet or mainnet:
-```pwsh
-sui client publish --gas-budget 100000000
-```
-
-### 2. Create a Poll
+### 1. Create a Poll
 Encode your question and options as UTF-8 bytes. Example using Python:
 ```python
 question = "¿Cuál es tu color favorito?"
@@ -44,22 +38,22 @@ Call the function:
 sui client call --package <package_address> --module voting_system --function create_poll --args "[bytes]" "[[bytes],[bytes],[bytes]]" --gas-budget 100000000
 ```
 
-### 3. Issue Voting Tickets
+### 2. Issue Voting Tickets
 ```pwsh
 sui client call --package <package_address> --module voting_system --function issue_voting_ticket --args <poll_id> <recipient_address> --gas-budget 100000000
 ```
 
-### 4. Vote
+### 3. Vote
 ```pwsh
 sui client call --package <package_address> --module voting_system --function vote --args <poll_id> <ticket_id> <option_index> --gas-budget 100000000
 ```
 
-### 5. Close Poll
+### 4. Close Poll
 ```pwsh
 sui client call --package <package_address> --module voting_system --function close_poll --args <poll_id> --gas-budget 100000000
 ```
 
-### 6. Query Results
+### 5. Query Results
 Check the poll object state using Sui Explorer or CLI to see vote counts and voters.
 
 ## Notes
