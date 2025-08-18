@@ -65,10 +65,5 @@ Check the poll object state using Sui Explorer or CLI to see vote counts and vot
 ## Notes
 - All string data must be passed as UTF-8 encoded bytes.
 - Each ticket can only be used once.
-- Update your frontend or scripts to use the correct package and object addresses after publishing.
 
-## License
-Specify your license in `Move.toml` if needed.
 
-## Authors
-Add your name and contact in `Move.toml` if desired.
